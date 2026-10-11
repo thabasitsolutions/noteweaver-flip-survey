@@ -160,10 +160,212 @@ function submitResponse(){
   saveStatus.textContent="Response saved on this device. Pending online sync if a server is configured.";
   syncPending();
 }
-function exportResponses(){
-  const payload={exported_at:new Date().toISOString(),survey:"NoteWeaver Flip Research Survey",responses:getResponses(),draft:JSON.parse(localStorage.getItem(DRAFT_KEY)||"null")};
-  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`noteweaver-survey-responses-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);
+function exportResponses() {
+  const payload = {
+    exported_at: new Date().toISOString(),
+    survey: "NoteWeaver Flip Research Survey",
+    responses: getResponses(),
+    draft: JSON.parse(
+      localStorage.getItem(DRAFT_KEY) || "null"
+    )
+  };
+
+  const date = new Date().toISOString().slice(0, 10);
+  const filename = `NoteWeaver_Flip_Responses_${date}`;
+
+  function downloadFile(content, type, extension) {
+    const blob = new Blob([content], {
+      type: `${type};charset=utf-8;`
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = `${filename}.${extension}`;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function escapeCSV(value) {
+    if (Array.isArray(value)) {
+      value = value.join("; ");
+    }
+
+    if (value === null || value === undefined) {
+      value = "";
+    }
+
+    return `"${String(value).replace(/"/g, '""')}"`;
+  }
+
+  function exportJSON() {
+    downloadFile(
+      JSON.stringify(payload, null, 2),
+      "application/json",
+      "json"
+    );
+  }
+
+  function exportCSV() {
+    const responses = payload.responses;
+
+    if (!responses.length) {
+      alert("There are no submitted responses to export yet.");
+      return;
+    }
+
+    const headers = [
+      "Response ID",
+      "Survey",
+      "Created At",
+      "Sync Status",
+      ...new Set(
+        responses.flatMap(response =>
+          Object.keys(response.answers || {})
+        )
+      )
+    ];
+
+    const rows = responses.map(response => [
+      response.id,
+      response.survey_name,
+      response.client_created_at,
+      response.sync_status,
+      ...headers.slice(4).map(key =>
+        response.answers?.[key] ?? ""
+      )
+    ]);
+
+    const csv = [
+      headers.map(escapeCSV).join(","),
+      ...rows.map(row => row.map(escapeCSV).join(","))
+    ].join("\r\n");
+
+    downloadFile("\uFEFF" + csv, "text/csv", "csv");
+  }
+
+  function printResponses() {
+    const responses = payload.responses;
+
+    if (!responses.length) {
+      alert("There are no submitted responses to print.");
+      return;
+    }
+
+    const printWindow = window.open("", "_blank");
+
+    if (!printWindow) {
+      alert("Please allow pop-ups to print the responses.");
+      return;
+    }
+
+    const responseHTML = responses.map((response, index) => {
+      const answerHTML = Object.entries(response.answers || {})
+        .map(([question, answer]) => `
+          <tr>
+            <th>${escapeHTML(question)}</th>
+            <td>${escapeHTML(
+              Array.isArray(answer)
+                ? answer.join(", ")
+                : answer
+            )}</td>
+          </tr>
+        `).join("");
+
+      return `
+        <section class="response">
+          <h2>Response ${index + 1}</h2>
+          <p><strong>Submitted:</strong>
+            ${escapeHTML(response.client_created_at || "")}
+          </p>
+          <p><strong>Sync status:</strong>
+            ${escapeHTML(response.sync_status || "unknown")}
+          </p>
+          <table>${answerHTML}</table>
+        </section>
+      `;
+    }).join("");
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>NoteWeaver Flip Survey Responses</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            color: #222;
+          }
+          h1 { margin-bottom: 8px; }
+          .response {
+            margin-top: 30px;
+            page-break-inside: avoid;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+            vertical-align: top;
+          }
+          th {
+            width: 30%;
+            background: #f2f2f2;
+          }
+          @media print {
+            button { display: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <h1>NoteWeaver Flip Research Survey</h1>
+        <p>Exported: ${escapeHTML(payload.exported_at)}</p>
+        ${responseHTML}
+        <button onclick="window.print()">Print / Save as PDF</button>
+      </body>
+      </html>
+    `);
+
+    printWindow.document.close();
+  }
+
+  const choice = prompt(
+    "EXPORT SURVEY RESPONSES\n\n" +
+    "1 - Download JSON (complete data)\n" +
+    "2 - Download CSV (Excel spreadsheet)\n" +
+    "3 - Print / Save as PDF\n\n" +
+    "Enter 1, 2, or 3:"
+  );
+
+  if (choice === "1") {
+    exportJSON();
+  } else if (choice === "2") {
+    exportCSV();
+  } else if (choice === "3") {
+    printResponses();
+  } else if (choice !== null) {
+    alert("Invalid choice. Please select 1, 2, or 3.");
+  }
 }
 prevBtn.addEventListener("click",()=>{collectVisibleValues();saveDraft();if(currentSection>0){currentSection--;renderSection();window.scrollTo({top:0,behavior:"smooth"});}});
 nextBtn.addEventListener("click",()=>{if(!validateSection())return;saveDraft();if(currentSection<sections.length-1){currentSection++;renderSection();window.scrollTo({top:0,behavior:"smooth"});}else submitResponse();});
