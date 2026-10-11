@@ -1,0 +1,10 @@
+{
+  "name": "NoteWeaver Flip Research Survey",
+  "short_name": "NW Survey",
+  "description": "Offline-ready research survey for NoteWeaver Flip",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090909",
+  "theme_color": "#101010",
+  "icons": []
+}
