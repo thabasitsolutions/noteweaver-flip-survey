@@ -1,5 +1,4 @@
-const CACHE_NAME = "noteweaver-survey-v2";
-
+const CACHE_NAME = "noteweaver-survey-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
