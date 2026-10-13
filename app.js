@@ -3,8 +3,8 @@
  Offline-first: localStorage draft + response queue, JSON export, optional API sync.
  Set API_URL to your deployed HTTPS Django endpoint to enable central collection.
 */
-const API_URL = ""; // Example: "https://your-domain.example/api/survey-responses/"
-const STORAGE_KEY = "noteweaver_survey_v1";
+
+const API_URL = "https://noteweaver-survey-beckend.onrender.com/api/survey-responses/";const STORAGE_KEY = "noteweaver_survey_v1";
 const DRAFT_KEY = "noteweaver_survey_draft_v1";
 
 const sections = [
