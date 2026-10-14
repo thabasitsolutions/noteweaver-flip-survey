@@ -3,103 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101010">
-  <meta name="description" content="NoteWeaver Flip research survey for students, teachers and working professionals.">
-  <title>NoteWeaver Flip | Research Survey</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="THABIRA FLIP Research Survey — help us understand how people create, organise and use notes, documents, photos and digital books.">
+  <title>THABIRA FLIP — Research Survey</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand-mark" aria-hidden="true">N</div>
-    <div>
-      <p class="eyebrow">NOTEWEAVER FLIP</p>
-      <h1>Research Survey</h1>
-    </div>
-    <span id="connectionBadge" class="status">Checking…</span>
-  </header>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="THABIRA FLIP survey home">
+        <span class="brand-mark" aria-hidden="true"><span>T</span><i></i></span>
+        <span class="brand-copy"><strong>THABIRA <em>FLIP</em></strong><small>Ideas. Notes. Possibilities.</small></span>
+      </a>
+      <div id="connectionBadge" class="status" role="status" aria-live="polite">Checking connection…</div>
+    </header>
 
-  <main class="shell">
-    <section class="intro card">
-      <p class="eyebrow gold">HELP SHAPE THE APP</p>
-      <h2>Meet NoteWeaver Flip</h2>
-      <p class="intro-lead">Weave · Flip · Remember</p>
-      <p>NoteWeaver Flip is a digital notebook app designed to bring notes, books, documents and photos together in one organised library. This research survey asks students, teachers and working professionals what they need from an app like this.</p>
-      <div class="offer-list">
-        <div><span class="offer-icon">▤</span><span><strong>Books and notes</strong><small>Create and organise digital learning or work material.</small></span></div>
-        <div><span class="offer-icon">▧</span><span><strong>Documents and photos</strong><small>Keep files and images together in your library.</small></span></div>
-        <div><span class="offer-icon">▣</span><span><strong>Document scanning</strong><small>Scan documents into your digital workspace.</small></span></div>
-        <div><span class="offer-icon">↻</span><span><strong>Offline and online access</strong><small>The planned experience includes local access and online synchronisation when connected.</small></span></div>
-      </div>
-      <div class="preview-heading">
-        <div><p class="eyebrow gold">APP PREVIEW</p><h3>Take a look inside</h3></div>
-        <span class="preview-hint">Swipe or scroll through the screens</span>
-      </div>
-      <div class="phone-gallery" aria-label="NoteWeaver Flip app screenshots">
-        <article class="phone-preview">
-          <div class="phone-frame">
-            <div class="phone-speaker"></div>
-            <img src="01-login.png" alt="NoteWeaver Flip sign-in screen showing the app logo, email and password fields, login button and create account link" loading="eager">
-            <div class="phone-home-indicator"></div>
+    <main>
+      <section class="hero intro">
+        <div class="eyebrow"><span></span> RESEARCH SURVEY</div>
+        <h1>Help shape the future of <span>THABIRA FLIP.</span></h1>
+        <p class="hero-copy">We are exploring how students, educators and working professionals create, organise and access notes, documents, photos and digital books. Your feedback will help guide the app's development.</p>
+        <div class="hero-meta">
+          <div><span class="meta-icon">◷</span><span><strong>About 5–8 minutes</strong><small>Complete at your own pace</small></span></div>
+          <div><span class="meta-icon">↻</span><span><strong>Offline-friendly</strong><small>Responses can sync when online</small></span></div>
+        </div>
+        <div class="notice"><strong>Your choice matters.</strong> You can leave your name blank. Contact details are optional and should only be provided if you want to be contacted about testing or future feedback.</div>
+      </section>
+
+      <section class="survey-card" aria-label="Research survey">
+        <div class="survey-heading">
+          <div><p class="eyebrow">THABIRA FLIP</p><h2>Your feedback</h2></div>
+          <span id="sectionCounter" class="section-counter">Section 1 of 7</span>
+        </div>
+        <div class="progress-track" aria-label="Survey progress"><div id="progressBar" class="progress-bar"></div></div>
+        <form id="surveyForm" novalidate>
+          <div id="sectionContent"></div>
+          <div id="formError" class="error-box" role="alert" hidden></div>
+          <div class="form-actions">
+            <button type="button" id="prevBtn" class="btn btn-quiet">← Back</button>
+            <div class="action-right">
+              <button type="button" id="saveBtn" class="btn btn-outline">Save draft</button>
+              <button type="button" id="nextBtn" class="btn btn-primary">Continue →</button>
+            </div>
           </div>
-          <h4>1. Sign in</h4><p>Access the app using the sign-in screen.</p>
-        </article>
-        <article class="phone-preview">
-          <div class="phone-frame">
-            <div class="phone-speaker"></div>
-            <img src="02-library.png" alt="NoteWeaver Flip My Library home screen with Books, Notes, Documents, Photos, Favorites, Trash and bottom navigation" loading="lazy">
-            <div class="phone-home-indicator"></div>
+          <p id="saveStatus" class="save-status" aria-live="polite">Your draft is saved on this device when you choose Save draft.</p>
+        </form>
+        <section id="thankYou" class="thank-you" hidden>
+          <div class="success-mark">✓</div>
+          <p class="eyebrow">RESPONSE RECORDED</p>
+          <h2>Thank you for helping us build <span>THABIRA FLIP.</span></h2>
+          <p>Your response has been saved on this device. If you are online, it will be sent to the survey server. If not, it will remain queued for synchronisation when your connection returns.</p>
+          <div class="thank-actions">
+            <button type="button" id="exportAfterBtn" class="btn btn-outline">Export my saved responses</button>
+            <button type="button" id="newResponseBtn" class="btn btn-primary">Start another response</button>
           </div>
-          <h4>2. My Library</h4><p>See books, notes, documents, photos, favorites and trash in one place.</p>
-        </article>
-        <article class="phone-preview">
-          <div class="phone-frame">
-            <div class="phone-speaker"></div>
-            <img src="03-add-menu.png" alt="NoteWeaver Flip add menu with Book, Note, Document, Photo and Scan Document options" loading="lazy">
-            <div class="phone-home-indicator"></div>
-          </div>
-          <h4>3. Add content</h4><p>Create a book or note, add a document or photo, or scan a document.</p>
-        </article>
-      </div>
-      <p class="preview-disclaimer">These screenshots show the current app interface. Some capabilities described in the survey may still be in development. Please answer based on what you see and what would be useful to you.</p>
-      <div class="progress-wrap">
-        <div class="progress-meta"><span id="sectionLabel">Section 1 of 7</span><span id="progressPercent">14% complete</span></div>
-        <div class="progress-track"><div id="progressBar"></div></div>
-      </div>
-    </section>
+        </section>
+      </section>
+      <section class="privacy-note"><span aria-hidden="true">◇</span><p><strong>Privacy note</strong><br>Survey responses are used to understand user needs and improve THABIRA FLIP. Do not include sensitive personal information in open-text answers.</p></section>
+    </main>
 
-    <form id="surveyForm" class="card survey-card" novalidate>
-      <div id="sectionContent"></div>
-      <div class="form-error" id="formError" role="alert"></div>
-      <div class="nav-row">
-        <button type="button" id="prevBtn" class="btn secondary">← Previous</button>
-        <button type="button" id="saveBtn" class="btn ghost">Save draft</button>
-        <button type="button" id="nextBtn" class="btn primary">Next →</button>
-      </div>
-    </form>
-
-    <section class="card privacy-note">
-      <h3>Privacy and saving</h3>
-      <p>Your draft is saved on this device. When a secure survey server is configured, submitted responses can sync when internet access returns. Avoid entering sensitive personal information.</p>
-      <div class="utility-row">
-        <button type="button" id="exportBtn" class="btn secondary">Export saved responses</button>
-        <button type="button" id="installBtn" class="btn ghost" hidden>Install survey</button>
-      </div>
-      <p class="small" id="saveStatus" aria-live="polite">Nothing saved yet.</p>
-    </section>
-
-    <section id="thankYou" class="card thank-you" hidden>
-      <div class="success-icon">✓</div>
-      <p class="eyebrow gold">RESPONSE SAVED</p>
-      <h2>Thank you for helping.</h2>
-      <p>Your response has been saved on this device. If online sync is configured, it will be sent to the survey server when a connection is available.</p>
-      <div class="utility-row">
-        <button type="button" id="newResponseBtn" class="btn primary">Start another response</button>
-        <button type="button" id="exportAfterBtn" class="btn secondary">Export responses</button>
-      </div>
-    </section>
-  </main>
-  <footer>NoteWeaver Flip · Research Survey · Offline-ready web app</footer>
-  <script src="app.js"></script>
+    <footer class="footer">
+      <span>© <span id="year"></span> THABIRA FLIP</span>
+      <span>Research that helps us build better tools.</span>
+      <button type="button" id="exportBtn" class="footer-export">Export saved responses</button>
+    </footer>
+  </div>
+  <script src="./app.js" defer></script>
 </body>
 </html>
