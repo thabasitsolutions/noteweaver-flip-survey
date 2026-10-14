@@ -126,3 +126,37 @@ h2 { font-size: clamp(23px, 3.5vw, 31px); letter-spacing: -.025em; margin: 0; }
   .phone-preview p { font-size: 10px; }
 }
 @media print { body { background: #fff; color: #111; } .topbar, .footer, .form-actions, .status { display:none; } .survey-card { box-shadow:none; border:0; } }
+
+
+/* Robust phone previews: the phone frames and branded placeholders remain visible even if screenshots fail. */
+.app-showcase { display: block; width: 100%; }
+.phone-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: clamp(10px, 2.8vw, 30px); width: 100%; }
+.phone-preview { min-width: 0; }
+.phone-frame { display: block; width: min(100%, 210px); min-width: 0; aspect-ratio: 9 / 19.2; height: auto; background: #080808; isolation: isolate; }
+.phone-frame img { position: absolute; z-index: 1; inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px); object-fit: cover; object-position: top center; border-radius: 21px; background: transparent; }
+.phone-screen-fallback { position: absolute; z-index: 0; inset: 7px; border-radius: 21px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 18px 8px; text-align: center; color: #f5f3ed; background: radial-gradient(ellipse at top, #29251b 0, #101011 58%, #080808 100%); border: 1px solid rgba(213,180,106,.28); }
+.phone-screen-fallback::before, .phone-screen-fallback::after { content: ''; position: absolute; left: 14%; right: 14%; height: 1px; background: rgba(213,180,106,.32); }
+.phone-screen-fallback::before { top: 20%; } .phone-screen-fallback::after { bottom: 20%; }
+.fallback-brand { font-size: clamp(7px, 1.1vw, 10px); letter-spacing: .08em; font-weight: 800; }
+.fallback-brand b { color: #d5b46a; }
+.phone-screen-fallback strong { font-size: clamp(8px, 1.2vw, 12px); color: #f0dca5; }
+.phone-screen-fallback small { font-size: clamp(6px, .9vw, 9px); line-height: 1.5; color: #b4b1a8; }
+.fallback-book { display: grid; place-items: center; width: 35%; aspect-ratio: 1; border: 1px solid #d5b46a; border-radius: 10px; color: #d5b46a; font-size: clamp(22px, 3vw, 34px); box-shadow: inset -5px 0 0 rgba(213,180,106,.12); }
+.phone-frame img.image-loaded { z-index: 1; }
+.phone-frame img.image-failed { display: none; }
+@media (max-width: 600px) {
+  .phone-gallery { gap: 8px; }
+  .phone-frame { width: 100%; padding: 4px; border-radius: 18px; }
+  .phone-frame img { inset: 4px; width: calc(100% - 8px); height: calc(100% - 8px); border-radius: 13px; }
+  .phone-screen-fallback { inset: 4px; border-radius: 13px; padding: 8px 3px; gap: 6px; }
+  .phone-camera { top: 5px; height: 6px; }
+  .phone-home-indicator { bottom: 6px; height: 2px; }
+  .phone-preview h3 { font-size: 10px; }
+  .phone-preview p { font-size: 9px; overflow-wrap: anywhere; }
+}
+@media (max-width: 360px) {
+  .phone-gallery { grid-template-columns: 1fr; gap: 20px; }
+  .phone-frame { width: min(100%, 190px); }
+  .phone-preview h3 { font-size: 12px; }
+  .phone-preview p { font-size: 11px; }
+}
