@@ -7,7 +7,7 @@
   <meta name="description" content="THABIRA FLIP Research Survey — help us understand how people create, organise and use notes, documents, photos and digital books.">
   <title>THABIRA FLIP — Research Survey</title>
   <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=thabira-phone-fix-2">
 </head>
 <body>
   <div class="site-shell">
@@ -31,7 +31,7 @@
             <article class="phone-preview">
               <div class="phone-frame">
                 <div class="phone-camera" aria-hidden="true"></div>
-                <img src="assets/01-login.png" alt="THABIRA FLIP sign-in screen preview" loading="eager">
+                <div class="phone-screen-fallback" aria-hidden="true"><span class="fallback-brand">THABIRA <b>FLIP</b></span><span class="fallback-book" aria-hidden="true">▤</span><strong>01 · SIGN IN</strong><small>Your workspace begins here</small></div><img src="./assets/01-login.png" alt="THABIRA FLIP sign-in screen preview" loading="eager" onload="this.classList.add('image-loaded')" onerror="this.classList.add('image-failed')">
                 <div class="phone-home-indicator" aria-hidden="true"></div>
               </div>
               <h3>01 · Sign in</h3>
@@ -40,7 +40,7 @@
             <article class="phone-preview">
               <div class="phone-frame">
                 <div class="phone-camera" aria-hidden="true"></div>
-                <img src="assets/02-library.png" alt="THABIRA FLIP My Library screen preview" loading="lazy">
+                <div class="phone-screen-fallback" aria-hidden="true"><span class="fallback-brand">THABIRA <b>FLIP</b></span><span class="fallback-book" aria-hidden="true">▤</span><strong>02 · MY LIBRARY</strong><small>Books · Notes · Documents · Photos</small></div><img src="./assets/02-library.png" alt="THABIRA FLIP My Library screen preview" loading="lazy" onload="this.classList.add('image-loaded')" onerror="this.classList.add('image-failed')">
                 <div class="phone-home-indicator" aria-hidden="true"></div>
               </div>
               <h3>02 · My Library</h3>
@@ -49,7 +49,7 @@
             <article class="phone-preview">
               <div class="phone-frame">
                 <div class="phone-camera" aria-hidden="true"></div>
-                <img src="assets/03-add-menu.png" alt="THABIRA FLIP create and add content menu preview" loading="lazy">
+                <div class="phone-screen-fallback" aria-hidden="true"><span class="fallback-brand">THABIRA <b>FLIP</b></span><span class="fallback-book" aria-hidden="true">▤</span><strong>03 · CREATE</strong><small>Make something new</small></div><img src="./assets/03-add-menu.png" alt="THABIRA FLIP create and add content menu preview" loading="lazy" onload="this.classList.add('image-loaded')" onerror="this.classList.add('image-failed')">
                 <div class="phone-home-indicator" aria-hidden="true"></div>
               </div>
               <h3>03 · Create</h3>
