@@ -9,42 +9,42 @@ const DRAFT_KEY = "noteweaver_survey_draft_v1";
 const SURVEY_NAME = "THABIRA FLIP Research Survey";
 
 const sections = [
-  { title: "About you", help: "Tell us a little about yourself. You can leave your name blank.", questions: [
+  { title: "About you", help: "Tell us about yourself so we can understand who THABIRA FLIP should serve. Your name is optional.", questions: [
     {id:"date",label:"Survey date",type:"date"},
-    {id:"name",label:"Name",type:"text",optional:true,placeholder:"Your name (optional)"},
-    {id:"role",label:"1. Which group best describes you?",type:"radio",required:true,options:["High School Student","College/University Student","Teacher/Lecturer","Working Professional","Other"],other:true},
+    {id:"name",label:"Name (optional)",type:"text",optional:true,placeholder:"Your name (optional)"},
+    {id:"role",label:"1. Which group best describes you?",type:"radio",required:true,options:["High School Student","College/University Student","Teacher/Lecturer","Working Professional","Business Owner","Other"],other:true},
     {id:"age",label:"2. What is your age group?",type:"radio",required:true,options:["Under 15","15–18","19–25","26–35","36+"]}
   ]},
-  { title: "Your current note-taking habits", help: "We want to understand how you currently store and find information.", questions: [
-    {id:"method",label:"3. How do you currently take notes?",type:"checkbox",required:true,options:["Notebook/Paper","Microsoft Word","Google Docs","Phone Notes App","Tablet Applications","Other"],other:true},
-    {id:"current_problems",label:"4. What problems do you experience with your current note-taking method?",type:"textarea",required:true,placeholder:"Describe the problems you face…"},
-    {id:"lose_notes",label:"5. How often do you lose, damage, or struggle to find important notes?",type:"radio",required:true,options:["Never","Sometimes","Often","Very Often"]}
+  { title: "Your current needs", help: "Tell us how you currently manage learning, work and personal information.", questions: [
+    {id:"current_tools",label:"3. Which tools do you currently use to organise your work or learning? (Select all that apply)",type:"checkbox",required:true,options:["Paper notebooks","Phone notes app","Microsoft Word or Google Docs","Calendar or task app","Document scanner or PDF app","Cloud storage","Several separate apps","Other"],other:true},
+    {id:"current_problems",label:"4. What is the biggest problem you face when organising notes, documents, tasks or records?",type:"textarea",required:true,placeholder:"Describe the main problem you experience…"},
+    {id:"switching_apps",label:"5. How often do you switch between different apps to complete your tasks?",type:"radio",required:true,options:["Never","Sometimes","Often","Very often"]}
   ]},
-  { title: "Organisation and learning", help: "Choose the features that would make managing notes easier.", questions: [
-    {id:"organise_difficulty",label:"6. Do you struggle to organise notes by subjects, topics, or projects?",type:"radio",required:true,options:["Yes","No","Sometimes"]},
-    {id:"helpful_features",label:"7. Which features would help you manage your notes better? (Select all that apply)",type:"checkbox",required:true,options:["Create digital notebooks","Organise notes into folders/books","Add pictures and files","Search notes quickly","Share notes with others","Access notes anywhere"]},
-    {id:"access_importance",label:"8. How important is it for you to access your notes anywhere?",type:"radio",required:true,options:["Not Important","Slightly Important","Important","Very Important"]}
+  { title: "Explore the updated features", help: "Review the feature list above, then tell us which tools would be useful to you.", questions: [
+    {id:"useful_features",label:"6. Which THABIRA FLIP features would be most useful to you? (Select all that apply)",type:"checkbox",required:true,options:["Talk to Thabira assistant","Voice input or dictation","Document scanner","File converter","Notes and books","Library for saved work","Tasks and organisation","Student workspace","Business workspace","Profile and privacy settings"]},
+    {id:"workspace",label:"7. Which workspace would you use most?",type:"radio",required:true,options:["Student","Business","Worker / Professional","Personal use","More than one workspace","Not sure yet"]},
+    {id:"one_place",label:"8. How useful would it be to have these tools together in one app?",type:"radio",required:true,options:["Not useful","A little useful","Useful","Very useful"]}
   ]},
-  { title: "About THABIRA FLIP", help: "THABIRA FLIP is being developed as a digital workspace for creating and organising notes, documents, photos and books, including a book-style page-flipping experience. Some features may still be under development.", questions: [
-    {id:"use_app",label:"9. Would you use an app like THABIRA FLIP?",type:"radio",required:true,options:["Definitely","Maybe","No"]},
-    {id:"app_features",label:"10. Which THABIRA FLIP features interest you most? (Select all that apply)",type:"checkbox",required:true,options:["Digital notebooks/books","Writing and editing notes","Adding images","Scanning documents","Converting photos to PDF","Searching information quickly","Organising subjects/projects","Cloud backup","Offline access and later sync","Sharing notes","Custom notebook designs"]},
-    {id:"wanted_feature",label:"11. What feature would you like to see added to THABIRA FLIP?",type:"textarea",required:false,placeholder:"Share your ideas…"}
+  { title: "Using THABIRA FLIP", help: "We want to understand how the updated app could fit into your daily routine.", questions: [
+    {id:"use_app",label:"9. How likely are you to use THABIRA FLIP if it meets your needs?",type:"radio",required:true,options:["Very likely","Somewhat likely","Not sure","Unlikely"]},
+    {id:"top_feature",label:"10. Which single feature would you try first?",type:"radio",required:true,options:["Talk to Thabira","Scanner","Converter","Notes and books","Library","Tasks","Student workspace","Business workspace","Profile and settings"]},
+    {id:"wanted_feature",label:"11. What would you want THABIRA FLIP to help you do that is difficult today?",type:"textarea",required:false,placeholder:"Describe a task, problem or idea…"}
   ]},
-  { title: "For teachers and educators", help: "These questions are most relevant to teachers and lecturers, but everyone may answer if they have an observation to share.", questions: [
-    {id:"teacher_tools",label:"12. If you are a teacher or lecturer, would a digital notebook help you organise your work? (Select all that apply)",type:"checkbox",required:false,options:["Lesson plans","Teaching materials","Student resources","Marking notes","Not applicable","Other"],other:true},
-    {id:"recommend_students",label:"13. Would you recommend a note organisation app to students?",type:"radio",required:false,options:["Yes","No","Maybe","Not applicable"]},
-    {id:"student_challenges",label:"14. What challenges do students face when managing learning material?",type:"textarea",required:false,placeholder:"Share what you have observed…"}
+  { title: "Student and education needs", help: "These questions focus on learning and education. If they do not apply to you, you can skip them.", questions: [
+    {id:"study_tools",label:"12. Which learning tools would help you? (Select all that apply)",type:"checkbox",required:false,options:["Organise subjects and notes","Study plans and revision","Assignments and deadlines","Scan learning material","Keep documents and books together","Ask questions using the assistant","Not applicable","Other"],other:true},
+    {id:"student_value",label:"13. Would a dedicated student workspace help you organise school, college or university work?",type:"radio",required:false,options:["Yes","No","Maybe","Not applicable"]},
+    {id:"education_challenges",label:"14. What is one challenge you face when managing school, college or university work?",type:"textarea",required:false,placeholder:"Share your experience…"}
   ]},
-  { title: "For work and business", help: "These questions explore how THABIRA FLIP might support work and business tasks.", questions: [
-    {id:"work_use",label:"15. Would you use THABIRA FLIP for work or business purposes?",type:"radio",required:false,options:["Yes","No","Maybe"]},
-    {id:"work_tasks",label:"16. What would you use it for? (Select all that apply)",type:"checkbox",required:false,options:["Meeting notes","Project planning","Research","Ideas and brainstorming","Personal organisation","Documents and records","Other"],other:true}
+  { title: "Business and professional needs", help: "These questions explore the app's usefulness for work, business and everyday organisation.", questions: [
+    {id:"work_use",label:"15. Would you use THABIRA FLIP for work or business?",type:"radio",required:false,options:["Yes","No","Maybe"]},
+    {id:"work_tasks",label:"16. Which work or business activities could you manage with it? (Select all that apply)",type:"checkbox",required:false,options:["Meeting notes","Tasks and planning","Research and ideas","Customer information","Invoices and expenses","Documents and records","Personal organisation","Not applicable","Other"],other:true}
   ]},
-  { title: "Final feedback", help: "Your suggestions will help us improve THABIRA FLIP.", questions: [
-    {id:"better_than_others",label:"17. What would make THABIRA FLIP better than other note-taking applications?",type:"textarea",required:false,placeholder:"Your suggestions…"},
-    {id:"test_app",label:"18. Would you like to test an early version of THABIRA FLIP?",type:"radio",required:false,options:["Yes","No"]},
-    {id:"future_feedback",label:"19. Would you like to provide future feedback?",type:"radio",required:false,options:["Yes","No"]},
-    {id:"contact_name",label:"Contact name",type:"text",optional:true,placeholder:"Optional"},
-    {id:"contact",label:"Email or phone number",type:"text",optional:true,placeholder:"Optional"}
+  { title: "Final feedback", help: "Your feedback will help us prioritise the next improvements to THABIRA FLIP.", questions: [
+    {id:"improvement",label:"17. What should we improve or add next?",type:"textarea",required:false,placeholder:"Tell us what matters most to you…"},
+    {id:"test_app",label:"18. Would you be interested in testing THABIRA FLIP and sharing feedback?",type:"radio",required:false,options:["Yes","No","Maybe"]},
+    {id:"future_feedback",label:"19. Would you like to receive information about future testing or updates?",type:"radio",required:false,options:["Yes","No"]},
+    {id:"contact_name",label:"Contact name (optional)",type:"text",optional:true,placeholder:"Optional"},
+    {id:"contact",label:"Email or phone number (optional)",type:"text",optional:true,placeholder:"Only if you want us to contact you"}
   ]}
 ];
 
